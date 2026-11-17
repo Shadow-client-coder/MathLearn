@@ -1,0 +1,7 @@
+project_id = "edjooijygfaaubmcpefa"
+
+[functions.ai-chat]
+verify_jwt = true
+
+[functions.owner-session]
+verify_jwt = false
