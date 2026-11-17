@@ -14,7 +14,7 @@ Deno.serve(async (request) => {
     const expectedUser = Deno.env.get('ADMIN_USERNAME') || 'Admin';
     const expectedPassword = Deno.env.get('ADMIN_PASSWORD');
     if (!expectedPassword) return Response.json({ error: 'Chưa cấu hình ADMIN_PASSWORD trong Edge Function Secrets.' }, { status: 503, headers: cors });
-    if (username !== expectedUser || password !== expectedPassword) return Response.json({ error: 'Sai tài khoản hoặc mật khẩu Owner.' }, { status: 401, headers: cors });
+    if (String(username).toLowerCase() !== expectedUser.toLowerCase() || password !== expectedPassword) return Response.json({ error: 'Sai tài khoản hoặc mật khẩu Owner.' }, { status: 401, headers: cors });
 
     const url = Deno.env.get('SUPABASE_URL')!;
     const serviceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
@@ -22,7 +22,7 @@ Deno.serve(async (request) => {
     if (!serviceKey || !publicKey) return Response.json({ error: 'Supabase Edge Function thiếu key hệ thống.' }, { status: 503, headers: cors });
 
     const admin = createClient(url, serviceKey, { auth: { persistSession: false } });
-    const email = 'math-learn-owner@learnmath.invalid';
+    const email = 'math-learn-owner@mathlearn.app';
     const listed = await admin.auth.admin.listUsers({ page: 1, perPage: 1000 });
     if (listed.error) throw listed.error;
     let owner = listed.data.users.find((item) => item.email === email);
