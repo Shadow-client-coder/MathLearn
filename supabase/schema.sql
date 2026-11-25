@@ -277,4 +277,12 @@ create policy submissions_update_self_or_teacher on storage.objects for update t
 
 do $$ begin alter publication supabase_realtime add table public.messages; exception when duplicate_object then null; when undefined_object then null; end $$;
 do $$ begin alter publication supabase_realtime add table public.forum_posts; exception when duplicate_object then null; when undefined_object then null; end $$;
+do $$ begin alter publication supabase_realtime add table public.class_members; exception when duplicate_object then null; when undefined_object then null; end $$;
+
+-- Allow common presentation formats for class materials and homework previews.
+update storage.buckets set allowed_mime_types=array[
+  'image/png','image/jpeg','image/webp','application/pdf','application/msword',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  'application/vnd.ms-powerpoint','application/vnd.openxmlformats-officedocument.presentationml.presentation'
+] where id in ('class-files','submissions');
 

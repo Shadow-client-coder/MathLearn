@@ -4,11 +4,11 @@ Bản **GitHub Pages**: giao diện tĩnh ở `site/`, dữ liệu/Auth/Realtime
 
 ## Các chức năng
 
-Tài khoản username/mật khẩu, chọn học sinh hoặc giáo viên, Owner `Admin`, tạo/tham gia lớp, kênh chat/thông báo/hỏi đáp/AI/bài tập, realtime, tag, KaTeX, bảng vẽ, tệp riêng tư, bài nộp và chấm điểm, roles/quyền, audit log, mute/kick/ban, giao diện sáng/tối và onboarding.
+Tài khoản username/mật khẩu, chọn học sinh hoặc giáo viên một lần theo tài khoản, Owner `Admin`, tạo/tham gia lớp, kênh chat/thông báo/hỏi đáp/AI/bài tập, realtime, trạng thái thành viên online, tag, KaTeX, bảng vẽ, xem trước tệp riêng tư, bài nộp và chấm điểm, roles có màu và quyền, audit log, mute theo thời gian/kick/ban, Minigame lớp học, trang About, giao diện sáng/tối và onboarding.
 
 ## 1. Supabase
 
-1. Trong Supabase SQL Editor, chạy toàn bộ [`supabase/schema.sql`](supabase/schema.sql) một lần. File có thêm các cột còn thiếu và gỡ policy của bản schema cũ.
+1. Trong Supabase SQL Editor, chạy toàn bộ [`supabase/schema.sql`](supabase/schema.sql). Có thể chạy lại để áp dụng cập nhật realtime thành viên và loại tệp trình chiếu.
 2. Authentication → Sign In / Providers → Email: bật Email/Password. Tắt Confirm email khi dùng username giả email `@learnmath.local`.
 3. Authentication → URL Configuration: đặt Site URL thành `https://TEN-GITHUB.github.io/TEN-REPO/`.
 4. Tại Edge Function Secrets, thêm `MATH_LEARN_PUBLISHABLE_KEY` với publishable key, `ADMIN_PASSWORD` (mật khẩu Owner riêng, dài) và `OPENAI_API_KEY` (nếu bật AI). Username Owner là `Admin`.
